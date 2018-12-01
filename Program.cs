@@ -16,10 +16,6 @@ namespace HelperBot
     static void Main(string[] args)
     {
 
-      var configurationBuilder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
-      IConfigurationRoot configuration = configurationBuilder.Build();
-      var generalSettingsConfig = new AppConfig();
-      configuration.GetSection("GeneralSettings").Bind(generalSettingsConfig);
 
       Console.WriteLine(generalSettingsConfig.FileStoragePath);
 
