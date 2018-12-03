@@ -17,7 +17,7 @@ namespace HelperBot
     {
 
 
-      Console.WriteLine(generalSettingsConfig.FileStoragePath);
+      //Console.WriteLine(generalSettingsConfig.FileStoragePath);
 
 
       var clients = new List<long>();
