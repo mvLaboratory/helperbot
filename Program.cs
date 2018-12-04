@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using HelperBot.Data;
 using HelperBot.Models;
+using HelperBot.Utils;
 using Microsoft.Extensions.Configuration;
 using Telegram.Bot;
 using Telegram.Bot.Args;
@@ -10,46 +12,34 @@ namespace HelperBot
 {
   class Program
   {
-    private static readonly TelegramBotClient bot = new TelegramBotClient("798717728:AAE14QSFQFEcpkeYm4VGR1ibbcAYEN20nkg");
-    private static long LastChatId;
+    private static readonly TelegramBotClient Bot = new TelegramBotClient(ConfigManager.Settings.AppConfig.BotId);
+    private static FileStorage _storage;
 
     static void Main(string[] args)
     {
+      _storage = new FileStorage();
+      Bot.OnMessage += MsgEvnt;
+      Bot.OnMessageEdited += MsgEvnt;
 
+      Bot.StartReceiving();
 
-      //Console.WriteLine(generalSettingsConfig.FileStoragePath);
-
-
-      var clients = new List<long>();
-      var clientStorage = new FileInfo("ClientInfo");
-      if (clientStorage.Exists)
+      while (true)
       {
-        //clientStorage.OpenRead()
+        var input = Console.ReadLine();
+        if (input?.Equals("Exit", StringComparison.OrdinalIgnoreCase) ?? false)
+        {
+          break;
+        }
+        Bot.SendTextMessageAsync(_storage.ReadAll<Client>().ChatId, input);
       }
-
-      Console.WriteLine("Hello World!");
-      bot.OnMessage += MsgEvnt;
-      bot.OnMessageEdited += MsgEvnt;
-
-      bot.StartReceiving();
-
-      var input = Console.ReadLine();
-      if (LastChatId == 0)
-      {
-        Console.WriteLine("No chat is available.");
-        Console.ReadKey();
-        return;
-
-      }
-      bot.SendTextMessageAsync(LastChatId, input);
-
-      Console.ReadKey();
-      bot.StartReceiving();
+   
+      Bot.StopReceiving();
     }
 
     public static void MsgEvnt(object sender, MessageEventArgs args)
     {
-      LastChatId = args.Message.Chat.Id;
+      Console.WriteLine(args.Message.Text);
+      _storage.Write(new Client { ChatId = args.Message.Chat.Id });
     }
   }
 }

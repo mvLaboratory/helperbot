@@ -1,22 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using HelperBot.Utils;
+using Newtonsoft.Json;
 
 namespace HelperBot.Data
 {
   public class FileStorage : IStorage
   {
-    public String ReadAll()
+    public T ReadAll<T>()
     {
-      return "";
+      var rawData = File.ReadAllText(ConfigManager.Settings.AppConfig.FileStoragePath);
+      return JsonConvert.DeserializeObject<T>(rawData);
     }
 
-    public void Write()
+    public void Write<T>(T objectForSave)
     {
-      using (var file = new StreamWriter(@"C:\Users\Public\TestFolder\WriteLines2.txt", true))
+      var serialisedObj = JsonConvert.SerializeObject(objectForSave) ?? throw new ArgumentNullException(nameof(objectForSave));
+      using (var file = new StreamWriter(ConfigManager.Settings.AppConfig.FileStoragePath, false))
       {
-        file.WriteLine("Fourth line");
+        file.WriteLine(serialisedObj);
       }
     }
   }

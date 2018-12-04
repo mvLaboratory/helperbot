@@ -4,7 +4,10 @@ using System.Text;
 
 namespace HelperBot.Data
 {
-  interface IStorage
+  public interface IStorage
   {
+    T ReadAll<T>();
+
+    void Write<T>(T objectForSave);
   }
 }

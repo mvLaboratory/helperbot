@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 using HelperBot.Models;
 using Microsoft.Extensions.Configuration;
 
@@ -9,17 +6,17 @@ namespace HelperBot.Utils
 {
   public class ConfigManager
   {
-    public static ConfigManager Instance => new ConfigManager();
+    public static ConfigManager Settings => _instance ?? (_instance = new ConfigManager());
+    public AppConfig AppConfig { get; } = new AppConfig();
 
     private ConfigManager()
     {
       var configurationBuilder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
       var configuration = configurationBuilder.Build();
-      var generalSettingsConfig = new AppConfig();
-      configuration.GetSection("GeneralSettings").Bind(generalSettingsConfig);
 
+      configuration.GetSection("GeneralSettings").Bind(AppConfig);
     }
 
-    ConfigManager insrtance;
+    private static ConfigManager _instance;
   }
 }
