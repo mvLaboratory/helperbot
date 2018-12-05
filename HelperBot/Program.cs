@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using HelperBot.Data;
 using HelperBot.Models;
-using HelperBot.Utils;
-using Microsoft.Extensions.Configuration;
 using Telegram.Bot;
 using Telegram.Bot.Args;
+using Utils;
 
 namespace HelperBot
 {

@@ -1,8 +1,8 @@
 ﻿using System.IO;
-using HelperBot.Models;
 using Microsoft.Extensions.Configuration;
+using Models.Config;
 
-namespace HelperBot.Utils
+namespace Utils
 {
   public class ConfigManager
   {
