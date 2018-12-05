@@ -1,9 +1,11 @@
-﻿namespace DAL.Data
+﻿using System.Collections.Generic;
+
+namespace DAL.Data
 {
   public interface IStorage
   {
-    T ReadAll<T>();
+    HashSet<T> ReadAll<T>() where T : new();
 
-    void Write<T>(T objectForSave);
+    void Write<T>(T objectForSave) where T : new();
   }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
-using HelperBot.Data;
-using HelperBot.Models;
+using System.Linq;
+using DAL.Data;
+using Models.Bot;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Utils;
@@ -14,6 +15,7 @@ namespace HelperBot
 
     static void Main(string[] args)
     {
+      Console.WriteLine("Start:");
       _storage = new FileStorage();
       Bot.OnMessage += MsgEvnt;
       Bot.OnMessageEdited += MsgEvnt;
@@ -27,7 +29,10 @@ namespace HelperBot
         {
           break;
         }
-        Bot.SendTextMessageAsync(_storage.ReadAll<Client>().ChatId, input);
+
+        _storage.ReadAll<Client>().ToList().ForEach(client =>
+            Bot.SendTextMessageAsync(client.ChatId, input)
+          );
       }
    
       Bot.StopReceiving();
@@ -35,7 +40,7 @@ namespace HelperBot
 
     public static void MsgEvnt(object sender, MessageEventArgs args)
     {
-      Console.WriteLine(args.Message.Text);
+      Console.WriteLine($"{args.Message.From.ToString()}: {args.Message.Text}");
       _storage.Write(new Client { ChatId = args.Message.Chat.Id });
     }
   }
