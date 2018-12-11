@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleChat", "ConsoleChat\ConsoleChat.csproj", "{245113FD-81C1-4481-BD65-350C263DAC0D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHelper", "WebHelper\WebHelper.csproj", "{AAC63C46-0CE6-4E9F-BD12-2C0CE7B8FE6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{245113FD-81C1-4481-BD65-350C263DAC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{245113FD-81C1-4481-BD65-350C263DAC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{245113FD-81C1-4481-BD65-350C263DAC0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAC63C46-0CE6-4E9F-BD12-2C0CE7B8FE6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAC63C46-0CE6-4E9F-BD12-2C0CE7B8FE6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAC63C46-0CE6-4E9F-BD12-2C0CE7B8FE6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAC63C46-0CE6-4E9F-BD12-2C0CE7B8FE6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

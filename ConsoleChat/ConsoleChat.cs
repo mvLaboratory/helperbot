@@ -1,11 +1,10 @@
 ﻿using System;
 using HelperBot;
-using Models.Bot;
 using Telegram.Bot.Args;
 
 namespace ConsoleChat
 {
-  class Program
+  class ConsoleChat
   {
     static void Main(string[] args)
     {
