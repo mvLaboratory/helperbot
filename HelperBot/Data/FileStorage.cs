@@ -1,16 +1,16 @@
 ﻿using System;
 using System.IO;
-using HelperBot.Utils;
 using Newtonsoft.Json;
+using Utils;
 
 namespace HelperBot.Data
 {
-  public class FileStorage : IStorage
+  public class DelFileStorage 
   {
-    public T ReadAll<T>()
+    public T[] ReadAll<T>()
     {
       var rawData = File.ReadAllText(ConfigManager.Settings.AppConfig.FileStoragePath);
-      return JsonConvert.DeserializeObject<T>(rawData);
+      return JsonConvert.DeserializeObject<T[]>(rawData);
     }
 
     public void Write<T>(T objectForSave)

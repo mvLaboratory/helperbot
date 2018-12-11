@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HelperBot.Models
+namespace Models.Config
 {
   public class AppConfig
   {
