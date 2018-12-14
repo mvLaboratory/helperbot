@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HelperBot\HelperBot.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Hangfire.AspNetCore">
       <HintPath>..\..\..\..\..\Users\Volodymyr_Mykytiuk\.nuget\packages\hangfire.aspnetcore\1.6.21\lib\netstandard1.3\Hangfire.AspNetCore.dll</HintPath>
     </Reference>

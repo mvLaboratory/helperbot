@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using HelperBot;
 
 namespace WebHelper
 {
@@ -18,6 +19,8 @@ namespace WebHelper
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
+
+
     }
 
     public IConfiguration Configuration { get; }
@@ -27,14 +30,14 @@ namespace WebHelper
     {
       services.Configure<CookiePolicyOptions>(options =>
       {
-              // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-              options.CheckConsentNeeded = context => true;
+        // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+        options.CheckConsentNeeded = context => true;
         options.MinimumSameSitePolicy = SameSiteMode.None;
       });
 
-
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
       services.AddHangfire(x => x.UseSqlServerStorage(@"Server=localhost\SQLEXPRESS;Database=HelperBotDb;Integrated Security=True;"));
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +65,13 @@ namespace WebHelper
                   name: "default",
                   template: "{controller=Home}/{action=Index}/{id?}");
       });
+
+      RecurringJob.AddOrUpdate(() => test(), Cron.Hourly);
+    }
+
+    public void test()
+    {
+      Chat.Instance.SendMessage("test");
     }
   }
 }
