@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Hangfire;
+﻿using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using HelperBot;
+using Utils;
 
 namespace WebHelper
 {
@@ -19,8 +14,6 @@ namespace WebHelper
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
-
-
     }
 
     public IConfiguration Configuration { get; }
@@ -66,12 +59,12 @@ namespace WebHelper
                   template: "{controller=Home}/{action=Index}/{id?}");
       });
 
-      RecurringJob.AddOrUpdate(() => test(), Cron.Hourly);
+      RecurringJob.AddOrUpdate(() => MessageCheck(), Cron.Hourly);
     }
 
-    public void test()
+    public void MessageCheck()
     {
-      Chat.Instance.SendMessage("test");
+      MessageSender.Instance.SendAllRecipients();
     }
   }
 }

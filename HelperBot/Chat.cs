@@ -15,9 +15,14 @@ namespace HelperBot
       get {
         if (_instance == null)
         {
-          _instance = new Chat();
+          lock (_padLock)
+          {
+            if (_instance == null)
+            {
+              _instance = new Chat();
+            }
+          }
         }
-
         return _instance;
       }
     }
@@ -57,6 +62,7 @@ namespace HelperBot
     }
 
     private static Chat _instance;
+    private static readonly Object _padLock = new Object();
     private readonly TelegramBotClient _bot;
     private readonly FileStorage _storage;
   }

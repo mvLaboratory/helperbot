@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.106
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperBot", "HelperBot\HelperBot.csproj", "{543DE1B0-151B-446E-8013-5686DF8F5810}"
 EndProject
@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "Utils\Utils.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{A69B0695-B899-448E-89D5-808CB1C8D3E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleChat", "ConsoleChat\ConsoleChat.csproj", "{245113FD-81C1-4481-BD65-350C263DAC0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleChat", "ConsoleChat\ConsoleChat.csproj", "{245113FD-81C1-4481-BD65-350C263DAC0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHelper", "WebHelper\WebHelper.csproj", "{AAC63C46-0CE6-4E9F-BD12-2C0CE7B8FE6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHelper", "WebHelper\WebHelper.csproj", "{AAC63C46-0CE6-4E9F-BD12-2C0CE7B8FE6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{AC3C4CF4-D721-4210-A9F9-82C20448E203}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{AAC63C46-0CE6-4E9F-BD12-2C0CE7B8FE6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAC63C46-0CE6-4E9F-BD12-2C0CE7B8FE6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAC63C46-0CE6-4E9F-BD12-2C0CE7B8FE6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC3C4CF4-D721-4210-A9F9-82C20448E203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC3C4CF4-D721-4210-A9F9-82C20448E203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC3C4CF4-D721-4210-A9F9-82C20448E203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC3C4CF4-D721-4210-A9F9-82C20448E203}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
