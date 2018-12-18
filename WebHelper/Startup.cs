@@ -1,4 +1,5 @@
-﻿using Hangfire;
+﻿using Core.Jobs;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,6 +32,7 @@ namespace WebHelper
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
       services.AddHangfire(x => x.UseSqlServerStorage(@"Server=localhost\SQLEXPRESS;Database=HelperBotDb;Integrated Security=True;"));
 
+      services.AddSingleton<IJobFactory, JobFactory>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,12 +61,13 @@ namespace WebHelper
                   template: "{controller=Home}/{action=Index}/{id?}");
       });
 
-      RecurringJob.AddOrUpdate(() => MessageCheck(), Cron.Hourly);
+      var jobFactory = app.ApplicationServices.GetService(typeof(IJobFactory));
+      RecurringJob.AddOrUpdate(() => MessageCheck(), Cron.MinuteInterval(10));
     }
 
     public void MessageCheck()
     {
-      MessageSender.Instance.SendAllRecipients();
+      MessageJob.Instance.SendAllRecipients();
     }
   }
 }
