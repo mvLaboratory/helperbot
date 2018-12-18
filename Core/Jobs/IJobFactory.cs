@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Core.Jobs
+﻿namespace Core.Jobs
 {
   public interface IJobFactory
   {
+    void SetUpDefaultJobs();
   }
 }
