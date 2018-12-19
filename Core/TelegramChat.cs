@@ -11,7 +11,7 @@ namespace HelperBot
 {
   public class TelegramChat : ITelegramChat, IDisposable
   {
-    public TelegramChat()
+    public TelegramChat(IRepository<Client> clientRepository)
     {
       _storage = new FileStorage();
       _bot = new TelegramBotClient(ConfigManager.Settings.AppConfig.BotId);

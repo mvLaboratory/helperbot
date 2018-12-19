@@ -1,11 +1,13 @@
 ﻿using Core;
 using Core.Jobs;
+using DAL.Data;
 using Hangfire;
 using HelperBot;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,8 +33,13 @@ namespace WebHelper
       });
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-      services.AddHangfire(x => x.UseSqlServerStorage(@"Server=localhost\SQLEXPRESS;Database=HelperBotDb;Integrated Security=True;"));
 
+      var connectionString = @"Server=localhost\SQLEXPRESS;Database=HelperBotDb;Integrated Security=True;";
+      services.AddHangfire(x => x.UseSqlServerStorage(connectionString));
+
+      services.AddDbContext<BotSqlStorage>(options => options.UseSqlServer(connectionString));
+
+      services.AddSingleton(typeof(IRepository<>), typeof(GenericRepository<>));
       services.AddSingleton<IJobFactory, JobFactory>();
       services.AddSingleton<ITelegramChat, TelegramChat>();
     }

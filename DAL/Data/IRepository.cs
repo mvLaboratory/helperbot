@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DAL.Data
 {
-  public interface IRepository<T>
+  public interface IRepository<T> where T : Entity
   {
-    T GetAll();
+    List<T> GetAll();
     T Get(Int64 id);
     T Save(T obj);
   }

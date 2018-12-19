@@ -30,7 +30,7 @@ namespace Core.Jobs
 
     public void SendAllRecipients()
     {
-      TelegramChat.Instance.SendMessage($"UTC time is: {DateTime.UtcNow}");
+     // TelegramChat.Instance.SendMessage($"UTC time is: {DateTime.UtcNow}");
     }
 
     private static MessageJob _instance;

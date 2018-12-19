@@ -1,8 +1,9 @@
-﻿using System;
+﻿using DAL;
+using System;
 
 namespace Models.Bot
 {
-  public class Client
+  public class Client : Entity
   {
     public Int64 ChatId { get; set; }
 
@@ -24,12 +25,12 @@ namespace Models.Bot
       return ChatId.GetHashCode();
     }
 
-    public static bool operator ==(Client left, Client right)
+    public static bool operator == (Client left, Client right)
     {
       return Equals(left, right);
     }
 
-    public static bool operator !=(Client left, Client right)
+    public static bool operator != (Client left, Client right)
     {
       return !Equals(left, right);
     }
