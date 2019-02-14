@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using DAL;
 using Microsoft.AspNetCore.Mvc;
 using WebHelper.Models;
 
@@ -10,8 +11,14 @@ namespace WebHelper.Controllers
 {
   public class HomeController : Controller
   {
+    public HomeController(HelperBotContext helperContext)
+    {
+      _dbContext = helperContext;
+    }
+
     public IActionResult Index()
     {
+      //var currency = _dbContext.CurrencyExchangeRate.ToList();
       return View();
     }
 
@@ -39,5 +46,7 @@ namespace WebHelper.Controllers
     {
       return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+    private HelperBotContext _dbContext;
   }
 }

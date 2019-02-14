@@ -1,9 +1,11 @@
 ﻿using Core.Jobs;
+using DAL;
 using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Utils;
@@ -30,7 +32,12 @@ namespace WebHelper
       });
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-      services.AddHangfire(x => x.UseSqlServerStorage(@"Server=localhost\SQLEXPRESS;Database=HelperBotDb;Integrated Security=True;"));
+
+      //TODO:: read from config
+      var dbConnectionString = @"Server=localhost\SQLEXPRESS;Database=HelperBotDb;Integrated Security=True;";
+      services.AddHangfire(x => x.UseSqlServerStorage(dbConnectionString));
+      services.AddDbContext<HelperBotContext>();
+      //options => options.UseSqlServer(dbConnectionString)
 
       services.AddSingleton<IJobFactory, JobFactory>();
     }

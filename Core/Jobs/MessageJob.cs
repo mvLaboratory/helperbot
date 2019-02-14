@@ -30,7 +30,7 @@ namespace Core.Jobs
 
     public void SendAllRecipients()
     {
-      Chat.Instance.SendMessage($"UTC time is: {DateTime.UtcNow}");
+      //Chat.Instance.SendMessage($"UTC time is: {DateTime.UtcNow}");
     }
 
     private static MessageJob _instance;
