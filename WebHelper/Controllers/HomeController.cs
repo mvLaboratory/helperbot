@@ -18,7 +18,7 @@ namespace WebHelper.Controllers
 
     public IActionResult Index()
     {
-      //var currency = _dbContext.CurrencyExchangeRate.ToList();
+      var currency = _dbContext.CurrencyExchangeRate.ToList();
       return View();
     }
 
