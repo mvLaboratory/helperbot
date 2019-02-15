@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Jobs;
 using DAL;
 using Microsoft.AspNetCore.Mvc;
 using WebHelper.Models;
@@ -11,15 +12,21 @@ namespace WebHelper.Controllers
 {
   public class HomeController : Controller
   {
-    public HomeController(HelperBotContext helperContext)
+    public HomeController(SendCurrencyExchangeRateNotificationJob sendCurrencyExchangeRateNotificationJob)
     {
-      _dbContext = helperContext;
+      _sendCurrencyExchangeRateNotificationJob = sendCurrencyExchangeRateNotificationJob;
     }
 
     public IActionResult Index()
     {
-      var currency = _dbContext.CurrencyExchangeRate.ToList();
       return View();
+    }
+
+    [HttpGet][Route("home/exchangeRate")][ActionName("GetExchangeRate")]
+    public IActionResult GetExchangeRate()
+    {
+      _sendCurrencyExchangeRateNotificationJob.Execute();
+      return View("~/Views/Home/Index.cshtml");
     }
 
     public IActionResult About()
@@ -47,6 +54,6 @@ namespace WebHelper.Controllers
       return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-    private HelperBotContext _dbContext;
+    private SendCurrencyExchangeRateNotificationJob _sendCurrencyExchangeRateNotificationJob;
   }
 }

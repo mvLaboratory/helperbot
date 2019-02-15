@@ -36,10 +36,11 @@ namespace WebHelper
       //TODO:: read from config
       var dbConnectionString = @"Server=localhost\SQLEXPRESS;Database=HelperBotDb;Integrated Security=True;";
       services.AddHangfire(x => x.UseSqlServerStorage(dbConnectionString));
-      services.AddDbContext<HelperBotContext>();
+      services.AddDbContextPool<HelperBotContext>(options => options.UseSqlServer(dbConnectionString));
       //options => options.UseSqlServer(dbConnectionString)
 
       services.AddSingleton<IJobFactory, JobFactory>();
+      services.AddScoped<SendCurrencyExchangeRateNotificationJob, SendCurrencyExchangeRateNotificationJob>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,8 +69,8 @@ namespace WebHelper
                   template: "{controller=Home}/{action=Index}/{id?}");
       });
 
-      var jobFactory = app.ApplicationServices.GetService(typeof(IJobFactory));
-      RecurringJob.AddOrUpdate(() => MessageCheck(), Cron.MinuteInterval(10));
+      //var jobFactory = app.ApplicationServices.GetService(typeof(IJobFactory));
+      RecurringJob.AddOrUpdate(() => MessageCheck(), Cron.MinuteInterval(60));
     }
 
     public void MessageCheck()
