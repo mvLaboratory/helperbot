@@ -1,6 +1,6 @@
-﻿using Core.Jobs;
-using DAL;
+﻿using DAL;
 using Hangfire;
+using Core.Jobs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Utils;
 
 namespace WebHelper
 {
@@ -69,13 +68,14 @@ namespace WebHelper
                   template: "{controller=Home}/{action=Index}/{id?}");
       });
 
-      //var jobFactory = app.ApplicationServices.GetService(typeof(IJobFactory));
-      RecurringJob.AddOrUpdate(() => MessageCheck(), Cron.MinuteInterval(60));
+      SetupJobs((IJobFactory)app.ApplicationServices.GetService(typeof(IJobFactory)));
     }
 
-    public void MessageCheck()
+    public void SetupJobs(IJobFactory jobFactory)
     {
-      MessageJob.Instance.SendAllRecipients();
+      jobFactory.GetDefailtJobs().ForEach(job =>
+        RecurringJob.AddOrUpdate(() => job.Item1.Execute(), job.Item2)
+      );
     }
   }
 }

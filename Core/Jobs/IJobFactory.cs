@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Core.Jobs
 {
   public interface IJobFactory
   {
+    List<Tuple<IJob, string>> GetDefailtJobs();
   }
 }
